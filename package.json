@@ -18,6 +18,7 @@
     "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/runtime": "^7.15.4",
     "@emurgo/cip14-js": "^3.0.1",
+    "@emurgo/cardano-serialization-lib-browser": "^9.1.4",
     "@headlessui/react": "^1.4.1",
     "axios": "^0.26.1",
     "buffer": "^6.0.3",
