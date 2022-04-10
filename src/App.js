@@ -385,7 +385,8 @@ export default function App() {
                     </div>
                 </div>
                 <div className="h-full flex flex-col justify-center max-w-screen-lg mx-auto px-5">
-                    <p className="text-3xl font-bold text-white text-center mb-4">Airdrop NFT</p>
+                    <p style={{ color: "#4DFCC7" }} className="text-3xl font-bold text-center mb-4">Kairos Artist Revelry</p>
+                    <p className="text-white">The <b>Kairos Artist Revelry</b> is an initiative by the <b>Kairos Core</b> to collaborate with different independent artists in order to feature their art and share their vision to the Cardano Community. The community chose to develop a vending machine in order to minimize costs. This vending machine will be used throughout the coming months where Kairos will be featuring a growing list of artists.</p>
                     {/* <p className="text-white mb-3 text-center">{c.VERSION}</p> */}
                     <div className="bg-white/10 p-6 h-1/2 rounded-lg text-white">
                         <div className="h-full w-full flex flex-col">

@@ -22,8 +22,8 @@ const c = {
         WHITE:0.30
     },
     BLOCKFROST_API_KEY: {
-        0: "testnetbKvUfObsMyfxVhcPUvyOT2E60VKErCDs", // (jeremyamon@gmail.com)
-        1: "mainnetywgBm2bioxel7dRVtJcq9ofkNjMibtop" // (jdamon@up.edu.ph)
+        0: "testneteDgsi4q4d7ZvI0StUUUT6UK5DazZeyQw", // (jeremyamon@gmail.com)
+        1: "mainnetUEPopoi1WmO7p8dJsv5UCzHgxiTo64CZ" // (jdamon@up.edu.ph)
     },
     // FORCE_DISCORD_ID: '' // Force to use this discord ID
     // id,tag,address,stake_address,status,verify_ada,register_time,blue,ruby,gold,silver,bronze,black,white,total,airdrop,airdrop_taken
