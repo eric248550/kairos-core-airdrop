@@ -8,7 +8,7 @@ const c = {
     POLICY_ID: "9d53f82c2ee0a83bd724d90dd74109766035204b0d30a82b96c4c99e",
     POLICY_SCRIPT: '8201818200581cd086c23b5df51f80ed86f8199897bd4f8b7e9070783d65d3a6848125',
     API_ENDPOINT: 'https://discord.com/api/v8',
-    CLIENT_ID: '952117847507763210', // 958330731543822396
+    CLIENT_ID: '952117847507763210',
     COOKIE_KEY: "sessionID",
     CURRENT_NFT_TYPE: 'AirdropEdition1', // For endpoint 2
     EDITIONS: ['Blue', 'Ruby', 'Gold', 'Silver', 'Bronze', 'Black', 'White'],
