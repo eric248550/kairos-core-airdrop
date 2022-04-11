@@ -57,66 +57,85 @@ export default function App() {
     const mainContents = () => {
         if (discordInfo !== null)
             return (
-                <div className="flex flex-row items-stretch flex-1">
-                    <div className="flex flex-col w-1/3 h-full">
-                        <div className="flex-1 bg-black/10 rounded-md text-center flex flex-col justify-center relative overflow-clip" onMouseEnter={mouseNftEnter} onMouseLeave={mouseNftLeave}>
-                            <img src="https://gw3.easy-ipfs.com/ipfs/Qmc8HUhSEYegtQP5GCCjJmPA793ML5E7b2uTDtC74hxu3E" alt="Airdrop for the week"></img>
-                            <p className={`text-white/20 transition-all ${mouseOverNft ? "opacity-0" : ""}`}>Hover for Description</p>
-                            <div className={`transition-all absolute bottom-0 top-0 left-0 right-0 bg-black/50 p-3 flex flex-col justify-center ${mouseOverNft ? "" : "opacity-0"}`}>
-                                <p className="">{c.NFT_TITLE}<br/><br/>{c.NFT_DESCRIPTION}</p>
+                <div className="flex flex-col items-stretch">
+                    <div className="flex flex-row items-stretch mb-5">
+                        <div className="flex flex-col w-2/3">
+                            <div className="flex-1 bg-black/10 rounded-md text-center flex flex-col justify-center relative overflow-clip">
+                                <img src="https://gw3.easy-ipfs.com/ipfs/Qmc8HUhSEYegtQP5GCCjJmPA793ML5E7b2uTDtC74hxu3E" alt="Airdrop for the week"></img>
                             </div>
                         </div>
-                        <p className="text-center p-2 tracking-widest">Artist: <a className="text-yellow-300 font-bold underline" href="https://twitter.com/SSlugs74">The Voyager</a></p>
+                        <div className="p-2"></div>
+                        <div className="flex flex-col w-1/3">
+                            <div className="flex-1 bg-black/10 rounded-md flex flex-col justify-center relative h-full w-full">
+                                <div className="bg-black/50 p-3 flex flex-col justify-center rounded-md h-full w-full">
+                                    <p className="text-xl">{c.NFT_TITLE}</p>
+                                    <p>by <a className="text-yellow-300 font-bold underline" href="https://twitter.com/SSlugs74">The Voyager</a></p>
+                                    <br/>
+                                    <p>{c.NFT_DESCRIPTION}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="p-2"></div>
-                    <div className="flex flex-col flex-1">
-                        <div className="bg-gray-400 rounded-md justify-center relative flex flex-row overflow-clip">
-                            <span className="my-auto text-black/50 font-bold inline bg-yellow-300 py-1 px-3">Discord User </span>
-                            <img className="avatar" src={'https://cdn.discordapp.com/avatars/' + discordInfo.id + '/' + discordInfo.avatar}/>
-                            <span className="text-black font-normal flex-1 py-1 px-3">{discordInfo.username}</span>
+                    <div className="flex flex-row items-stretch">
+                        <div className="flex flex-col flex-1 w-1/2">
+                            <div className="bg-gray-400 rounded-md justify-center relative flex flex-row overflow-clip">
+                                <span className="my-auto text-black/50 font-bold inline bg-yellow-300 py-1 px-3">Discord User </span>
+                                <img className="avatar" src={'https://cdn.discordapp.com/avatars/' + discordInfo.id + '/' + discordInfo.avatar}/>
+                                <span className="text-black font-normal flex-1 py-1 px-3">{discordInfo.username}</span>
+                            </div>
+                            <div className="p-2"></div>
+                            <div className="bg-white flex-1 rounded-md text-center relative overflow-clip flex flex-col">
+                                <p className="text-black/50 font-bold bg-yellow-300 p-1">WALLET CONTENTS</p>
+                                <div className="p-2 flex-1">
+                                    {
+                                        errorToDisplay != null && <div className="flex flex-col justify-center h-full"><p className='text-red-800'>
+                                            Error: <span>{errorToDisplay}</span>
+                                        </p></div>
+                                    }
+                                    {
+                                        (errorToDisplay != null) ? (<></>) :
+                                            (databaseResponse1 == null) ? <p className="text-black">Loading...</p> :
+                                                <table className="text-black w-full">
+                                                    <thead className="border-b-2 border-gray-400">
+                                                        <tr>
+                                                            <th className="p-1">Kairoscore Edition</th>
+                                                            <th className="p-1">Quantity</th>
+                                                            <th className="p-1">Probability</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {
+                                                            c.EDITIONS.filter((v, i, arr) => databaseResponse1[v.toLowerCase()] !== 0).map((v, i, arr) => {
+                                                                return (
+                                                                    <tr className="transition-all-fast" key={i}>
+                                                                        <td className="p-1">{v}</td>
+                                                                        <td className="p-1">{databaseResponse1[v.toLowerCase()]}</td>
+                                                                        <td className="p-1">{c.AIRDROP_PROBABILITIES[v.toUpperCase()] * 100}%</td>
+                                                                    </tr>
+                                                                );
+                                                            })
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                    }
+                                </div>
+                            </div>
                         </div>
                         <div className="p-2"></div>
-                        <div className="bg-white flex-1 rounded-md text-center relative overflow-clip flex flex-col">
-                            <p className="text-black/50 font-bold bg-yellow-300 p-1">WALLET CONTENTS</p>
-                            <div className="p-2 flex-1">
-                                {
-                                    errorToDisplay != null && <div className="flex flex-col justify-center h-full"><p className='text-red-800'>
-                                        Error: <span>{errorToDisplay}</span>
-                                    </p></div>
-                                }
-                                {
-                                    (errorToDisplay != null) ? (<></>) :
-                                        (databaseResponse1 == null) ? <p className="text-black">Loading...</p> :
-                                            <table className="text-black w-full">
-                                                <thead className="border-b-2 border-gray-400">
-                                                    <tr>
-                                                        <th className="p-1">Kairoscore Edition</th>
-                                                        <th className="p-1">Quantity</th>
-                                                        <th className="p-1">Probability</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {
-                                                        c.EDITIONS.filter((v, i, arr) => databaseResponse1[v.toLowerCase()] !== 0).map((v, i, arr) => {
-                                                            return (
-                                                                <tr className="transition-all-fast" key={i}>
-                                                                    <td className="p-1">{v}</td>
-                                                                    <td className="p-1">{databaseResponse1[v.toLowerCase()]}</td>
-                                                                    <td className="p-1">{c.AIRDROP_PROBABILITIES[v.toUpperCase()] * 100}%</td>
-                                                                </tr>
-                                                            );
-                                                        })
-                                                    }
-                                                </tbody>
-                                            </table>
-                                }
+                        <div className="flex flex-col w-1/2">
+                            <div className="flex-1 bg-black/10 rounded-md flex flex-col justify-center relative h-full w-full">
+                                <div className="bg-black/50 px-20 pt-20 pb-5 flex flex-col justify-center rounded-md h-full w-full">
+                                    <p>You have {databaseResponse1 ? databaseResponse1.airdrop : 0} NFT{databaseResponse1 && databaseResponse1.airdrop === 1 ? '' : 's'} that you can claim. This was determined probabilistically on the backend and will be reset for each drop.</p>
+                                    <br/>
+                                    {getMainButtonLoggedIn()}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             );
         return (<div className="flex flex-col justify-center h-full">
-            <p className="mb-10 text-center">Login Discord to connect your wallet</p>
+            <p className="my-32 text-center">Login Discord to connect your wallet</p>
         </div>);
     }
 
@@ -124,19 +143,26 @@ export default function App() {
         switch (appState) {
             case AppState.NeedLogIn:
                 return <button className="animated-all bg-white disabled:opacity-25 p-4 shadow-md rounded-md w-60 m-4 mx-auto" onClick={logInCallback}>Log In</button>
+            default:
+                return <></>;
+        }
+    }
+
+    const getMainButtonLoggedIn = () => {
+        switch (appState) {
             case AppState.LoggedIn:
                 if (databaseResponse1 == null || errorToDisplay != null)
                     return <></>;
                 if (databaseResponse1.airdrop === 0)
-                    return <button disabled className="animated-all bg-white disabled:opacity-50 p-4 shadow-md rounded-md w-60 m-4 mx-auto">No Eligible Cores!<br />Try Again Next Week!</button>
+                    return <button disabled className="animated-all bg-white disabled:opacity-50 p-4 shadow-md rounded-md w-60 m-4 mx-auto text-black">No Eligible Cores!<br />Try Again Next Week!</button>
                 if (databaseResponse1.airdrop === databaseResponse1.airdrop_taken)
-                    return <button disabled className="animated-all bg-white disabled:opacity-25 p-4 shadow-md rounded-md w-60 m-4 mx-auto">Already Claimed!</button>
+                    return <button disabled className="animated-all bg-white disabled:opacity-25 p-4 shadow-md rounded-md w-60 m-4 mx-auto text-black">Already Claimed!</button>
                 if (error == null)                    
-                    return <button onClick={claimCallback} className="animated-all bg-white disabled:opacity-25 p-4 shadow-md rounded-md hover:bg-yellow-100 w-60 m-4 mx-auto">Claim ({databaseResponse1.airdrop} NFTS!)</button>
+                    return <button onClick={claimCallback} className="animated-all bg-white disabled:opacity-25 p-4 shadow-md rounded-md hover:bg-yellow-100 w-60 m-4 mx-auto text-black">Claim ({databaseResponse1.airdrop} NFTS!)</button>
                 return <></>;
             case AppState.ProcessingClaim:
                 if (error == null)
-                    return <button disabled className="animated-all bg-white disabled:opacity-25 p-4 shadow-md rounded-md w-60 m-4 mx-auto">Processing...</button>
+                    return <button disabled className="animated-all bg-white disabled:opacity-25 p-4 shadow-md rounded-md w-60 m-4 mx-auto text-black">Processing...</button>
                 return <></>;
             case AppState.Done:
                 return <p className="p-4 text-white text-center">Airdrop Complete! Please use the following transaction hash to confirm on cardanoscan:<br/><br/>{databaseResponse3.txHash}</p>
@@ -354,7 +380,7 @@ export default function App() {
         <div>
             <section className="sectionStyle">
                 <div className="flex flex-row justify-center">
-                    <div className="fixed flex flex-row justify-start w-full items-center -mt-6 max-w-screen-lg">
+                    <div className="flex flex-row justify-start w-full items-center -mt-6 max-w-screen-lg">
                         <a href="https://www.kairoscore.xyz/"><img src={logo} alt="Logo" target="_blank" className="object-contain mt-5 h-28" /></a>
                         <p className="grow"></p>
                         <div className="hidden md:flex flex-row items-center">
@@ -384,11 +410,11 @@ export default function App() {
                         </div>
                     </div>
                 </div>
-                <div className="h-full flex flex-col justify-center max-w-screen-lg mx-auto px-5">
+                <div className="h-full flex flex-col justify-center max-w-screen-lg mx-auto px-5 pb-20">
                     <p style={{ color: "#4DFCC7" }} className="text-3xl font-bold text-center mb-4">Kairos Artist Revelry</p>
-                    <p className="text-white">The <b>Kairos Artist Revelry</b> is an initiative by the <b>Kairos Core</b> to collaborate with different independent artists in order to feature their art and share their vision to the Cardano Community. The community chose to develop a vending machine in order to minimize costs. This vending machine will be used throughout the coming months where Kairos will be featuring a growing list of artists.</p>
+                    <p className="text-white mb-5">The <b>Kairos Artist Revelry</b> is an initiative by the <b>Kairos Core</b> to collaborate with different independent artists in order to feature their art and share their vision to the Cardano Community. The community chose to develop a vending machine in order to minimize costs. This vending machine will be used throughout the coming months where Kairos will be featuring a growing list of artists.</p>
                     {/* <p className="text-white mb-3 text-center">{c.VERSION}</p> */}
-                    <div className="bg-white/10 p-6 h-1/2 rounded-lg text-white">
+                    <div className="bg-white/10 p-6 rounded-lg text-white">
                         <div className="h-full w-full flex flex-col">
                             {mainContents()}
                         </div>
